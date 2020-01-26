@@ -42,6 +42,10 @@ bat_stats_people <- left_join(bat_stats, people_batters, by = "playerID") %>%
 #deathCity,nameFirst,nameLast,nameGiven,weight,height,bats,throws,debut,finalGame)
 
 
+# Adding Season-by-Season Hitting Stats to our Master Event File
+clean_bat_stats_people <- left_join(clean_pbyp_data, bat_stats_people, by = c("yearID", "team", c("play.retroID" = "retroID")))
+
+
 
 # Cleaning Season-by-season Pitching Statistics
 pitch_stats <- pitching_stats[pitching_stats$yearID >= 2015, ] %>% 
@@ -69,10 +73,6 @@ pitch_stats_people <- left_join(pitch_stats, people_pitchers, by = "playerID") %
 #deathCountry,deathState,deathCity,nameFirst,nameLast,nameGiven,weight,height,bats,throws,debut,finalGame)
 
 
-
-
-# Adding Season-by-Season Hitting Stats to our Master Event File
-clean_bat_stats_people <- left_join(clean_pbyp_data, bat_stats_people, by = c("yearID", "team", c("play.retroID" = "retroID")))
 
 
 clean_bat_pitch_stats_people <- left_join(clean_bat_stats_people, pitch_stats_people, 
