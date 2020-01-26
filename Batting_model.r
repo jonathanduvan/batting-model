@@ -5,6 +5,8 @@
 rm(list = ls())
 library(tidyverse)
 library(retrosheet)
+library(data.table)
+library(glue)
 
 logos <- c("ANA", "BAL", "BOS", 'CHA', 'CLE', 'DET', 'HOU', 'KCA', 'MIN', 'NYA', 
            'OAK', 'SEA', 'TBA', 'TEX', 'TOR', 'ARI', 'ATL', 'CHN', 'CIN', 'COL', 
@@ -19,7 +21,6 @@ clean_data <- function(years, games, teams){
     for (game in games){
       for (team in teams) {
         
-
         play <- data.frame(getRetrosheet("play", year, team)[[game]]["play"])
         id <- data.frame(getRetrosheet("play", year, team)[[game]]["id"])
         version <- data.frame(getRetrosheet("play", year, teams)[[game]]["version"])
@@ -62,7 +63,6 @@ clean_data <- function(years, games, teams){
         
         
         rm('id', 'version', 'info', 'info_v2', 'start', 'start_v2', 'play','sub', 'sub_v2', 'players')
-        
        }
      }
    }
@@ -93,9 +93,9 @@ clean <- clean %>%
   select( yearID, id,id_v2, team, inning, bottom_inning, number_up, play.retroID, play.name, 
           batter_first_name, batter_last_name, play.batPos, play.fieldPos)
 
+
+
 #not_selected(hometeam,visteam, version, attendance, play.count,date, daynight,fieldcond, howscored, number,oscorer, pitches, precip, save,site,sky,starttime,temp,
 # timeofgame, ump1b,ump2b, ump3b,umphome, usedh,winddir,windspeed, wp, play.pitches,play.play,)
          
          
-df <- data.frame(names(clean))
-
