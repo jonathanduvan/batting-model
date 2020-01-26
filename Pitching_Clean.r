@@ -5,9 +5,7 @@
 # library(retrosheet)
 # library(data.table)
 
-
 setwd("~/Downloads/Project/Baseball/Data/")
-
 
 gamelogs <- read.csv('games.csv')
 atbats <- read.csv('atbats.csv')
@@ -40,9 +38,9 @@ each_ab <- atbats %>%
   ungroup() 
 
 
-
 each_ab_pitcher_names <- left_join(each_ab, pnames_pitchers, by = c("pitcher_id" = "id"))
 each_ab_pitcher_hitter_names <- left_join(each_ab_pitcher_names, pnames_batters, by = c("batter_id" = "id")) 
+
 
 
 ab_pitcher_hitter_names_games <- left_join(each_ab_pitcher_hitter_names, games, by = "g_id") %>% 
