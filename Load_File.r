@@ -1,8 +1,6 @@
 # Load Baseball Data File
 
 
-
-
 rm(list = ls())
 library(tidyverse)
 library(retrosheet)
@@ -66,7 +64,6 @@ for (year in 2018){
     }
   }
 }
-
 
 
 
