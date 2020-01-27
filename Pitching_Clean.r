@@ -86,10 +86,8 @@ clean_pbyp_data <- left_join(clean, ab_pitcher_hitter_names_games,
                              by = c("id_v2", "inning", 
                                     "team_v2", "bottom_inning", "batter_last_name", "batter_first_name"))
 
-
 #rm(games, each_ab, each_ab_pitcher_names, each_ab_pitcher_hitter_names, ab_pitcher_hitter_names_games, clean)
 
 
-unique(ab_pitcher_hitter_names_games$team)
 
 
