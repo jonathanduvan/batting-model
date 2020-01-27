@@ -43,7 +43,7 @@ pbyp_retrosheet <- pbyp_retrosheet %>%
           play.batPos, play.fieldPos)
 
 
-
+rm(pbyp_retrosheet)
 
 # Clean2: Kaggle - Play-by-Play Pitching Data --------------------------------------
 
@@ -52,7 +52,8 @@ pbyp_retrosheet <- pbyp_retrosheet %>%
 games <- gamelogs %>% 
   mutate(date = gsub("-", "/", date),
          date_special = gsub("/", "", date),
-         id_v2 = paste0(toupper(home_team), date_special)) %>% 
+         id_v2 = paste0(toupper(home_team), date_special),
+         yearID = as.integer(substr(g_id, 1, 4))) %>% 
   mutate(home_team_v2 = toupper(as.character(home_team)),
          home_team_v2 = sub("SLN", "STL", home_team_v2),
          home_team_v2 = sub("CHN", "CHC", home_team_v2),
@@ -132,7 +133,11 @@ bat_stats <- batting_stats[batting_stats$yearID >= 2015, ] %>%
 # Cleaning Player Names for Season-by-Season Hitting Stats
 people_batters <- people %>%
   mutate(batter_first_name = tolower(nameFirst),
-         batter_last_name = tolower(nameLast))
+         batter_last_name = tolower(nameLast),
+         batter_first_name = trim(batter_first_name),
+         batter_last_name = trim(batter_last_name),
+         batter_first_name = gsub("\\.| *| ", "", batter_first_name),
+         batter_last_name = gsub("\\.| *| ", "", batter_last_name))
 
 
 # Cleaning Season-by-season Pitching Statistics
