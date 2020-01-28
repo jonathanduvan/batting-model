@@ -19,8 +19,9 @@ pbyp_p_h_names <- left_join(pbyp_pitcher_names,
 pbyp_p_h_names_wgames <- left_join(pbyp_p_h_names, 
                                            games, 
                                            by = "g_id")  %>% 
-  mutate(team_v2 = ifelse(bottom_inning == 1, toupper(home_team_v2), toupper(away_team_v2))) %>% 
-  select(id_v2, g_id, yearID, team_v2, inning,
+  mutate(team_v2 = ifelse(bottom_inning == 1, toupper(home_team_v2), toupper(away_team_v2)),
+         team_v2_away = ifelse(bottom_inning == 1, toupper(away_team_v2), toupper(home_team_v2))) %>% 
+  select(id_v2, g_id, yearID, team_v2, team_v2_away, inning,
          bottom_inning, number_up, ab_id,
          batter_id, batter_first_name, 
          batter_last_name,pitcher_id,
@@ -111,17 +112,18 @@ sbys_pitchstats_wnames <- left_join(pitch_stats,
          W,L,G,GS,CG,SHO,SV,
          ERA,IBB,WP,HBP)
 
-stop()
-
 
 #Adding Season-by-Season Hitting Stats to our Master Event File
-mine <- left_join(pbyp_p_h_names_wgames, sbys_hitstats_wnames, 
-                                     by = c("yearID", "team_v2", "batter_last_name", "batter_first_name"))
+pbyp_sbys_hit <- left_join(pbyp_p_h_names_wgames, 
+                           sbys_hitstats_wnames,
+                           by = c("yearID", "team_v2", 
+                                  "batter_last_name", "batter_first_name"))
 
 
 
 
-completed_pbyp_sbys_both <- left_join(mine, 
-                                      sbys_pitchstats_wnames, 
-                                      by = c("yearID", "team_v2", "pitcher_last_name", "pitcher_first_name"))
+pbyp_sbys_both <- left_join(pbyp_sbys_hit, 
+                            sbys_pitchstats_wnames,
+                            by = c("yearID", c("team_v2_away" = "team_v2"),
+                                   "pitcher_last_name", "pitcher_first_name"))
 

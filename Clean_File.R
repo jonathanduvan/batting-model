@@ -87,8 +87,7 @@ pnames_pitchers <- player_names %>%
          pitcher_first_name = trim(pitcher_first_name),
          pitcher_last_name = trim(pitcher_last_name),
          pitcher_first_name = gsub("\\.| *| ", "", pitcher_first_name),
-         pitcher_last_name = gsub("\\.| *| ", "", pitcher_last_name),
-         pitcher_last_name = gsub(".+ ", "", pitcher_last_name)) %>% 
+         pitcher_last_name = gsub("\\.| *| ", "", pitcher_last_name)) %>% 
   select(id, pitcher_first_name, pitcher_last_name)
 
 
@@ -162,8 +161,7 @@ people_pitchers <- people %>%
          pitcher_first_name = trim(pitcher_first_name),
          pitcher_last_name = trim(pitcher_last_name),
          pitcher_first_name = gsub("\\.| *| ", "", pitcher_first_name),
-         pitcher_last_name = gsub("\\.| *| ", "", pitcher_last_name),
-         pitcher_last_name = gsub(".+ ", "", pitcher_last_name))
+         pitcher_last_name = gsub("\\.| *| ", "", pitcher_last_name))
 
 
 

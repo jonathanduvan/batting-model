@@ -6,7 +6,7 @@ library(tidyverse)
 library(retrosheet)
 library(data.table)
 library(glue)
-
+library(readxl)
 
 # Load 1: Retrosheet Data -------------------------------------------------
 
